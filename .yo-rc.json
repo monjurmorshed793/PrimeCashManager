@@ -1,0 +1,53 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "org.cash.manager",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.8.0",
+    "applicationType": "monolith",
+    "baseName": "PrimeCashManager",
+    "packageName": "org.cash.manager",
+    "packageFolder": "org/cash/manager",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "ZmNjYTU0MDU3MzRmYjY4YWRjZTEzN2Y2ZDk5OTE0NTdiNGUwZWYzNjg4NDgzMmFmODdjYzlkNTVmNTE4YjVlNmQwNGVhNTZiZjI5ZmNmZDEyZGEyYzM2NzZmYzBlN2NkMjdkMWNhNWI3ZjI1YzQ4ZGU2MzcwNGU2MGFiYzU0NzY=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1596021756665,
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-primeng-blueprint",
+        "version": "6.8.3"
+      }
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en"],
+    "blueprints": [
+      {
+        "name": "generator-jhipster-primeng-blueprint",
+        "version": "6.8.3"
+      }
+    ]
+  }
+}

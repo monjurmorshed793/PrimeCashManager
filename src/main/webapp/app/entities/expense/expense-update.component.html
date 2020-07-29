@@ -1,0 +1,147 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-expense-heading" jhiTranslate="primeCashManagerApp.expense.home.createOrEditLabel">Create or edit a Expense</h2>
+            <div class="form-grid ui-fluid">
+                <div class="p-field p-grid">
+                    <ng-container *ngIf="editForm.get('id')!.value">
+                    <label jhiTranslate="global.field.id" for="field_id" class="p-col-12 p-md-2">ID</label>
+                    <div class="p-col-12 p-md-10">
+                        <input pInputText type="number" name="id" id="field_id" formControlName="id" readonly/>
+                    </div>
+                    </ng-container>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.loginId" for="field_loginId" class="p-col-12 p-md-2">Login Id</label>
+                    <div class="p-col-12 p-md-10">
+                        <input pInputText type="text" name="loginId" id="field_loginId" formControlName="loginId"/>
+                        <div class="validation-messages">
+                            <ng-container *ngIf="editForm.get('loginId')!.invalid && (editForm.get('loginId')!.dirty || editForm.get('loginId')!.touched)">
+                                <p-message severity="error"
+                                           *ngIf="editForm.get('loginId')!.errors!.required" [text]="'entity.validation.required' | translate">
+                                </p-message>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.voucherNo" for="field_voucherNo" class="p-col-12 p-md-2">Voucher No</label>
+                    <div class="p-col-12 p-md-10">
+                        <input pInputText type="number" name="voucherNo" id="field_voucherNo" formControlName="voucherNo"/>
+                        <div class="validation-messages">
+                            <ng-container *ngIf="editForm.get('voucherNo')!.invalid && (editForm.get('voucherNo')!.dirty || editForm.get('voucherNo')!.touched)">
+                                <p-message severity="error"
+                                    [hidden]="!editForm.get('voucherNo')!.errors!.number" [text]="'entity.validation.number' | translate">
+                                </p-message>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.voucherDate" for="field_voucherDate" class="p-col-12 p-md-2">Voucher Date</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-calendar id="field_voucherDate" formControlName="voucherDate" [showIcon]="true"></p-calendar>
+                        <div class="validation-messages">
+                            <ng-container *ngIf="editForm.get('voucherDate')!.invalid && (editForm.get('voucherDate')!.dirty || editForm.get('voucherDate')!.touched)">
+                                <p-message severity="error"
+                                           *ngIf="editForm.get('voucherDate')!.errors!.required" [text]="'entity.validation.required' | translate">
+                                </p-message>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.month" for="field_month" class="p-col-12 p-md-2">Month</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-dropdown [options]="monthOptions" name="month" formControlName="month" id="field_month" placeholder="Choose">
+                            <ng-template let-month pTemplate="item">{{'primeCashManagerApp.MonthType.' + month.label | translate}}</ng-template>
+                        </p-dropdown>
+                        <div class="validation-messages">
+                            <ng-container *ngIf="editForm.get('month')!.invalid && (editForm.get('month')!.dirty || editForm.get('month')!.touched)">
+                                <p-message severity="error"
+                                           *ngIf="editForm.get('month')!.errors!.required" [text]="'entity.validation.required' | translate">
+                                </p-message>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.notes" for="field_notes" class="p-col-12 p-md-2">Notes</label>
+                    <div class="p-col-12 p-md-10">
+                        <textarea pInputTextarea name="notes" id="field_notes"
+                                  formControlName="notes"></textarea>
+                        <div class="validation-messages">
+                            <ng-container *ngIf="editForm.get('notes')!.invalid && (editForm.get('notes')!.dirty || editForm.get('notes')!.touched)">
+                                <p-message severity="error"
+                                           *ngIf="editForm.get('notes')!.errors!.required" [text]="'entity.validation.required' | translate">
+                                </p-message>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.totalAmount" for="field_totalAmount" class="p-col-12 p-md-2">Total Amount</label>
+                    <div class="p-col-12 p-md-10">
+                        <input pInputText type="number" name="totalAmount" id="field_totalAmount" formControlName="totalAmount"/>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.isPosted" for="field_isPosted" class="p-col-12 p-md-2">Is Posted</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-inputSwitch name="isPosted" id="field_isPosted" formControlName="isPosted"></p-inputSwitch>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.postDate" for="field_postDate" class="p-col-12 p-md-2">Post Date</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-calendar id="field_postDate" formControlName="postDate" [showIcon]="true" [showTime]="true"></p-calendar>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.createdBy" for="field_createdBy" class="p-col-12 p-md-2">Created By</label>
+                    <div class="p-col-12 p-md-10">
+                        <input pInputText type="text" name="createdBy" id="field_createdBy" formControlName="createdBy"/>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.createdOn" for="field_createdOn" class="p-col-12 p-md-2">Created On</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-calendar id="field_createdOn" formControlName="createdOn" [showIcon]="true" [showTime]="true"></p-calendar>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.modifiedBy" for="field_modifiedBy" class="p-col-12 p-md-2">Modified By</label>
+                    <div class="p-col-12 p-md-10">
+                        <input pInputText type="text" name="modifiedBy" id="field_modifiedBy" formControlName="modifiedBy"/>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.modifiedOn" for="field_modifiedOn" class="p-col-12 p-md-2">Modified On</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-calendar id="field_modifiedOn" formControlName="modifiedOn" [showIcon]="true" [showTime]="true"></p-calendar>
+                    </div>
+                </div>
+                <div class="p-field p-grid">
+                    <label jhiTranslate="primeCashManagerApp.expense.payTo" for="field_payTo" class="p-col-12 p-md-2">Pay To</label>
+                    <div class="p-col-12 p-md-10">
+                        <p-dropdown id="field_payTo" name="payTo" [options]="payToOptions" formControlName="payToId"
+                                    [virtualScroll]="true" [lazy]="true" [rows]="10" (onLazyLoad)="onPayToLazyLoadEvent($event)" [lazyLoadOnInit]="true" [filter]="true" [filterValue]="payToFilterValue"
+                                    placeholder="Choose" optionLabel="name" optionValue="id"></p-dropdown>
+                        <div class="validation-messages">
+                            <ng-container *ngIf="editForm.get('payToId')!.invalid && (editForm.get('payToId')!.dirty || editForm.get('payToId')!.touched)">
+                                <p-message severity="error"
+                                           *ngIf="editForm.get('payToId')!.errors!.required" [text]="'entity.validation.required' | translate">
+                                </p-message>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button pButton type="button" id="cancel-save" icon="pi pi-ban" class="ui-button-secondary" (click)="previousState()" [label]="'entity.action.cancel' | translate"></button>
+                <button pButton type="submit" id="save-entity" icon="pi pi-save" [disabled]="editForm.invalid || isSaving" [label]="'entity.action.save' | translate"></button>
+            </div>
+        </form>
+    </div>
+</div>

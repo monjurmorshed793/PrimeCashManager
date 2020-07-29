@@ -1,0 +1,162 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="primeCashManagerApp.deposit.home.title">Deposits</span>
+        <p-button id="jh-create-entity" class="float-right jh-create-entity create-deposit" [routerLink]="['/deposit/new']"
+                  [label]="'primeCashManagerApp.deposit.home.createLabel' | translate" icon="pi pi-plus" iconPos="left">
+        </p-button>
+    </h2>
+    <br/>
+    <p-table #depositTable [value]="deposits" [rowTrackBy]="trackId" [responsive]="true" [lazy]="true" [rows]="itemsPerPage" [totalRecords]="totalItems" [loading]="loading" sortMode="multiple" [lazyLoadOnInit]="false" [paginator]="true" (onLazyLoad)="onLazyLoadEvent($event)" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">
+                    <span jhiTranslate="primeCashManagerApp.deposit.id">ID</span>
+                    <p-sortIcon field="id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="loginId">
+                    <span jhiTranslate="primeCashManagerApp.deposit.loginId">Login Id</span>
+                    <p-sortIcon field="loginId"></p-sortIcon>
+                </th>
+                <th pSortableColumn="depositNo">
+                    <span jhiTranslate="primeCashManagerApp.deposit.depositNo">Deposit No</span>
+                    <p-sortIcon field="depositNo"></p-sortIcon>
+                </th>
+                <th pSortableColumn="depositBy">
+                    <span jhiTranslate="primeCashManagerApp.deposit.depositBy">Deposit By</span>
+                    <p-sortIcon field="depositBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="depositDate">
+                    <span jhiTranslate="primeCashManagerApp.deposit.depositDate">Deposit Date</span>
+                    <p-sortIcon field="depositDate"></p-sortIcon>
+                </th>
+                <th pSortableColumn="medium">
+                    <span jhiTranslate="primeCashManagerApp.deposit.medium">Medium</span>
+                    <p-sortIcon field="medium"></p-sortIcon>
+                </th>
+                <th pSortableColumn="amount">
+                    <span jhiTranslate="primeCashManagerApp.deposit.amount">Amount</span>
+                    <p-sortIcon field="amount"></p-sortIcon>
+                </th>
+                <th pSortableColumn="note">
+                    <span jhiTranslate="primeCashManagerApp.deposit.note">Note</span>
+                    <p-sortIcon field="note"></p-sortIcon>
+                </th>
+                <th pSortableColumn="isPosted">
+                    <span jhiTranslate="primeCashManagerApp.deposit.isPosted">Is Posted</span>
+                    <p-sortIcon field="isPosted"></p-sortIcon>
+                </th>
+                <th pSortableColumn="postDate">
+                    <span jhiTranslate="primeCashManagerApp.deposit.postDate">Post Date</span>
+                    <p-sortIcon field="postDate"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdBy">
+                    <span jhiTranslate="primeCashManagerApp.deposit.createdBy">Created By</span>
+                    <p-sortIcon field="createdBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdOn">
+                    <span jhiTranslate="primeCashManagerApp.deposit.createdOn">Created On</span>
+                    <p-sortIcon field="createdOn"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modifiedBy">
+                    <span jhiTranslate="primeCashManagerApp.deposit.modifiedBy">Modified By</span>
+                    <p-sortIcon field="modifiedBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modifiedOn">
+                    <span jhiTranslate="primeCashManagerApp.deposit.modifiedOn">Modified On</span>
+                    <p-sortIcon field="modifiedOn"></p-sortIcon>
+                </th>
+                <th style="width: 124px"></th>
+            </tr>
+            <tr>
+                <th>
+                    <input pInputText type="number" [ngModel]="depositTable.filters.id?.value"
+                           (ngModelChange)="filter($event, 'id')">
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="depositTable.filters.loginId?.value"
+                           (ngModelChange)="filter($event, 'loginId')">
+                </th>
+                <th>
+                    <input pInputText type="number" [ngModel]="depositTable.filters.depositNo?.value"
+                           (ngModelChange)="filter($event, 'depositNo')">
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="depositTable.filters.depositBy?.value"
+                           (ngModelChange)="filter($event, 'depositBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="depositDateRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true"
+                                (onSelect)="onDateSelect(depositDateRange, 'depositDate')" (onClearClick)="onDateSelect(depositDateRange, 'depositDate')"></p-calendar>
+                </th>
+                <th>
+                    <p-multiSelect [options]="mediumOptions" [ngModel]="depositTable.filters.medium?.value"
+                                   (ngModelChange)="filter($event, 'medium')">
+                        <ng-template let-medium pTemplate="item">{{'primeCashManagerApp.DepositMedium.' + medium.label | translate}}</ng-template>
+                    </p-multiSelect>
+                </th>
+                <th>
+                    <input pInputText type="number" [ngModel]="depositTable.filters.amount?.value"
+                           (ngModelChange)="filter($event, 'amount')">
+                </th>
+                <th>
+                </th>
+                <th>
+                    <p-triStateCheckbox [ngModel]="depositTable.filters.billable?.value"
+                                        (ngModelChange)="filter($event, 'isPosted')"></p-triStateCheckbox>
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="postDateRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(postDateRange, 'postDate', true)" (onClearClick)="onDateSelect(postDateRange, 'postDate', true)"></p-calendar>
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="depositTable.filters.createdBy?.value"
+                           (ngModelChange)="filter($event, 'createdBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="createdOnRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(createdOnRange, 'createdOn', true)" (onClearClick)="onDateSelect(createdOnRange, 'createdOn', true)"></p-calendar>
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="depositTable.filters.modifiedBy?.value"
+                           (ngModelChange)="filter($event, 'modifiedBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="modifiedOnRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(modifiedOnRange, 'modifiedOn', true)" (onClearClick)="onDateSelect(modifiedOnRange, 'modifiedOn', true)"></p-calendar>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-deposit>
+            <tr>
+                <td>{{deposit.id}}</td>
+                <td>{{deposit.loginId}}</td>
+                <td>{{deposit.depositNo}}</td>
+                <td>{{deposit.depositBy}}</td>
+                <td>{{deposit.depositDate | date:'mediumDate'}}</td>
+                <td jhiTranslate="{{'primeCashManagerApp.DepositMedium.' + deposit.medium}}">{{deposit.medium}}</td>
+                <td>{{deposit.amount}}</td>
+                <td>{{deposit.note}}</td>
+                <td>{{deposit.isPosted}}</td>
+                <td>{{deposit.postDate | date:'medium'}}</td>
+                <td>{{deposit.createdBy}}</td>
+                <td>{{deposit.createdOn | date:'medium'}}</td>
+                <td>{{deposit.modifiedBy}}</td>
+                <td>{{deposit.modifiedOn | date:'medium'}}</td>
+                <td>
+                    <div class="btn-group flex-btn-group-container">
+                        <p-button type="submit" [routerLink]="['/deposit', deposit.id, 'view' ]"
+                                  icon="pi pi-eye" styleClass="ui-button-info">
+                        </p-button>
+                        <p-button type="submit" [routerLink]="['/deposit', deposit.id, 'edit' ]"
+                                  icon="pi pi-pencil" styleClass="ui-button-warning">
+                        </p-button>
+                        <p-button type="submit" (click)="delete(deposit.id)"
+                                  icon="pi pi-times" styleClass="ui-button-danger">
+                        </p-button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

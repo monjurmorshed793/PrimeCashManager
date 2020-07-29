@@ -1,0 +1,17 @@
+{
+    "name": "ExpanseSeq",
+    "fields": [],
+    "relationships": [],
+    "changelogDate": "20200729142000",
+    "entityTableName": "expanse_seq",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "skipClient": true
+}

@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="expense">
+            <h2><span jhiTranslate="primeCashManagerApp.expense.detail.title">Expense</span> {{expense.id}}</h2>
+            <hr>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="primeCashManagerApp.expense.loginId">Login Id</span></dt>
+                <dd>
+                    <span>{{ expense.loginId }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.voucherNo">Voucher No</span></dt>
+                <dd>
+                    <span>{{ expense.voucherNo }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.voucherDate">Voucher Date</span></dt>
+                <dd>
+                    <span>{{ expense.voucherDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.month">Month</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'primeCashManagerApp.MonthType.' + expense.month }}">{{ expense.month }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.notes">Notes</span></dt>
+                <dd>
+                    <span>{{ expense.notes }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.totalAmount">Total Amount</span></dt>
+                <dd>
+                    <span>{{ expense.totalAmount }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.isPosted">Is Posted</span></dt>
+                <dd>
+                    <span>{{ expense.isPosted }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.postDate">Post Date</span></dt>
+                <dd>
+                    <span>{{ expense.postDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ expense.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ expense.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.modifiedBy">Modified By</span></dt>
+                <dd>
+                    <span>{{ expense.modifiedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.modifiedOn">Modified On</span></dt>
+                <dd>
+                    <span>{{ expense.modifiedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expense.payTo">Pay To</span></dt>
+                <dd>
+                    <div *ngIf="expense.payToId">
+                        <a [routerLink]="['/pay-to', expense.payToId, 'view']">
+                            {{ expense.payToName }}
+                        </a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button pButton type="submit" (click)="previousState()" class="ui-button-info" icon="pi pi-arrow-left" [label]="'entity.action.back' | translate"></button>
+            <button pButton type="button" icon="pi pi-pencil" [label]="'entity.action.edit' | translate" [routerLink]="['/expense', expense.id, 'edit']"></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="deposit">
+            <h2><span jhiTranslate="primeCashManagerApp.deposit.detail.title">Deposit</span> {{deposit.id}}</h2>
+            <hr>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.loginId">Login Id</span></dt>
+                <dd>
+                    <span>{{ deposit.loginId }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.depositNo">Deposit No</span></dt>
+                <dd>
+                    <span>{{ deposit.depositNo }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.depositBy">Deposit By</span></dt>
+                <dd>
+                    <span>{{ deposit.depositBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.depositDate">Deposit Date</span></dt>
+                <dd>
+                    <span>{{ deposit.depositDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.medium">Medium</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'primeCashManagerApp.DepositMedium.' + deposit.medium }}">{{ deposit.medium }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.amount">Amount</span></dt>
+                <dd>
+                    <span>{{ deposit.amount }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.note">Note</span></dt>
+                <dd>
+                    <span>{{ deposit.note }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.isPosted">Is Posted</span></dt>
+                <dd>
+                    <span>{{ deposit.isPosted }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.postDate">Post Date</span></dt>
+                <dd>
+                    <span>{{ deposit.postDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ deposit.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ deposit.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.modifiedBy">Modified By</span></dt>
+                <dd>
+                    <span>{{ deposit.modifiedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.deposit.modifiedOn">Modified On</span></dt>
+                <dd>
+                    <span>{{ deposit.modifiedOn }}</span>
+                </dd>
+            </dl>
+
+            <button pButton type="submit" (click)="previousState()" class="ui-button-info" icon="pi pi-arrow-left" [label]="'entity.action.back' | translate"></button>
+            <button pButton type="button" icon="pi pi-pencil" [label]="'entity.action.edit' | translate" [routerLink]="['/deposit', deposit.id, 'edit']"></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="payTo">
+            <h2><span jhiTranslate="primeCashManagerApp.payTo.detail.title">Pay To</span> {{payTo.id}}</h2>
+            <hr>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="primeCashManagerApp.payTo.name">Name</span></dt>
+                <dd>
+                    <span>{{ payTo.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.payTo.description">Description</span></dt>
+                <dd>
+                    <span>{{ payTo.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.payTo.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ payTo.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.payTo.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ payTo.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.payTo.modifiedBy">Modified By</span></dt>
+                <dd>
+                    <span>{{ payTo.modifiedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.payTo.modifiedOn">Modified On</span></dt>
+                <dd>
+                    <span>{{ payTo.modifiedOn }}</span>
+                </dd>
+            </dl>
+
+            <button pButton type="submit" (click)="previousState()" class="ui-button-info" icon="pi pi-arrow-left" [label]="'entity.action.back' | translate"></button>
+            <button pButton type="button" icon="pi pi-pencil" [label]="'entity.action.edit' | translate" [routerLink]="['/pay-to', payTo.id, 'edit']"></button>
+        </div>
+    </div>
+</div>

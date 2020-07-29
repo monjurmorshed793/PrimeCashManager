@@ -1,0 +1,97 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="primeCashManagerApp.payTo.home.title">Pay Tos</span>
+        <p-button id="jh-create-entity" class="float-right jh-create-entity create-pay-to" [routerLink]="['/pay-to/new']"
+                  [label]="'primeCashManagerApp.payTo.home.createLabel' | translate" icon="pi pi-plus" iconPos="left">
+        </p-button>
+    </h2>
+    <br/>
+    <p-table #payToTable [value]="payTos" [rowTrackBy]="trackId" [responsive]="true" [lazy]="true" [rows]="itemsPerPage" [totalRecords]="totalItems" [loading]="loading" sortMode="multiple" [lazyLoadOnInit]="false" [paginator]="true" (onLazyLoad)="onLazyLoadEvent($event)" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">
+                    <span jhiTranslate="primeCashManagerApp.payTo.id">ID</span>
+                    <p-sortIcon field="id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="name">
+                    <span jhiTranslate="primeCashManagerApp.payTo.name">Name</span>
+                    <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="description">
+                    <span jhiTranslate="primeCashManagerApp.payTo.description">Description</span>
+                    <p-sortIcon field="description"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdBy">
+                    <span jhiTranslate="primeCashManagerApp.payTo.createdBy">Created By</span>
+                    <p-sortIcon field="createdBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdOn">
+                    <span jhiTranslate="primeCashManagerApp.payTo.createdOn">Created On</span>
+                    <p-sortIcon field="createdOn"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modifiedBy">
+                    <span jhiTranslate="primeCashManagerApp.payTo.modifiedBy">Modified By</span>
+                    <p-sortIcon field="modifiedBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modifiedOn">
+                    <span jhiTranslate="primeCashManagerApp.payTo.modifiedOn">Modified On</span>
+                    <p-sortIcon field="modifiedOn"></p-sortIcon>
+                </th>
+                <th style="width: 124px"></th>
+            </tr>
+            <tr>
+                <th>
+                    <input pInputText type="number" [ngModel]="payToTable.filters.id?.value"
+                           (ngModelChange)="filter($event, 'id')">
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="payToTable.filters.name?.value"
+                           (ngModelChange)="filter($event, 'name')">
+                </th>
+                <th>
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="payToTable.filters.createdBy?.value"
+                           (ngModelChange)="filter($event, 'createdBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="createdOnRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(createdOnRange, 'createdOn', true)" (onClearClick)="onDateSelect(createdOnRange, 'createdOn', true)"></p-calendar>
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="payToTable.filters.modifiedBy?.value"
+                           (ngModelChange)="filter($event, 'modifiedBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="modifiedOnRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(modifiedOnRange, 'modifiedOn', true)" (onClearClick)="onDateSelect(modifiedOnRange, 'modifiedOn', true)"></p-calendar>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-payTo>
+            <tr>
+                <td>{{payTo.id}}</td>
+                <td>{{payTo.name}}</td>
+                <td>{{payTo.description}}</td>
+                <td>{{payTo.createdBy}}</td>
+                <td>{{payTo.createdOn | date:'medium'}}</td>
+                <td>{{payTo.modifiedBy}}</td>
+                <td>{{payTo.modifiedOn | date:'medium'}}</td>
+                <td>
+                    <div class="btn-group flex-btn-group-container">
+                        <p-button type="submit" [routerLink]="['/pay-to', payTo.id, 'view' ]"
+                                  icon="pi pi-eye" styleClass="ui-button-info">
+                        </p-button>
+                        <p-button type="submit" [routerLink]="['/pay-to', payTo.id, 'edit' ]"
+                                  icon="pi pi-pencil" styleClass="ui-button-warning">
+                        </p-button>
+                        <p-button type="submit" (click)="delete(payTo.id)"
+                                  icon="pi pi-times" styleClass="ui-button-danger">
+                        </p-button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

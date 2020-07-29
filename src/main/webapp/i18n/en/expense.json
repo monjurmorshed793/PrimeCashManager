@@ -1,0 +1,35 @@
+{
+  "primeCashManagerApp": {
+    "expense": {
+      "home": {
+        "title": "Expenses",
+        "createLabel": "Create a new Expense",
+        "createOrEditLabel": "Create or edit a Expense",
+        "notFound": "No Expenses found"
+      },
+      "created": "A new Expense is created with identifier {{ param }}",
+      "updated": "A Expense is updated with identifier {{ param }}",
+      "deleted": "A Expense is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Expense {{ id }}?"
+      },
+      "detail": {
+        "title": "Expense"
+      },
+      "id": "ID",
+      "loginId": "Login Id",
+      "voucherNo": "Voucher No",
+      "voucherDate": "Voucher Date",
+      "month": "Month",
+      "notes": "Notes",
+      "totalAmount": "Total Amount",
+      "isPosted": "Is Posted",
+      "postDate": "Post Date",
+      "createdBy": "Created By",
+      "createdOn": "Created On",
+      "modifiedBy": "Modified By",
+      "modifiedOn": "Modified On",
+      "payTo": "Pay To"
+    }
+  }
+}

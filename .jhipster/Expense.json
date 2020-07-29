@@ -1,0 +1,97 @@
+{
+    "name": "Expense",
+    "fields": [
+        {
+            "fieldName": "loginId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "voucherNo",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "voucherDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "month",
+            "fieldType": "MonthType",
+            "fieldValues": "JANUARY,FEBRUARY,MARCH,APRIL,MAY,JUNE,JULY,AUGUST,SEPTEMBER,OCTOBER,NOVEMBER,DECEMBER",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "notes",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "totalAmount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "isPosted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "postDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "modifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "modifiedOn",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "expenseDtl",
+            "otherEntityRelationshipName": "expense",
+            "relationshipName": "expanseDtl"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "payTo",
+            "otherEntityRelationshipName": "expense",
+            "relationshipValidateRules": "required",
+            "relationshipName": "payTo",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200729141900",
+    "entityTableName": "expense",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

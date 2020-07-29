@@ -1,0 +1,136 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="primeCashManagerApp.expenseDtl.home.title">Expense Dtls</span>
+        <p-button id="jh-create-entity" class="float-right jh-create-entity create-expense-dtl" [routerLink]="['/expense-dtl/new']"
+                  [label]="'primeCashManagerApp.expenseDtl.home.createLabel' | translate" icon="pi pi-plus" iconPos="left">
+        </p-button>
+    </h2>
+    <br/>
+    <p-table #expenseDtlTable [value]="expenseDtls" [rowTrackBy]="trackId" [responsive]="true" [lazy]="true" [rows]="itemsPerPage" [totalRecords]="totalItems" [loading]="loading" sortMode="multiple" [lazyLoadOnInit]="false" [paginator]="true" (onLazyLoad)="onLazyLoadEvent($event)" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.id">ID</span>
+                    <p-sortIcon field="id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.quantity">Quantity</span>
+                    <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <th pSortableColumn="unitPrice">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.unitPrice">Unit Price</span>
+                    <p-sortIcon field="unitPrice"></p-sortIcon>
+                </th>
+                <th pSortableColumn="amount">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.amount">Amount</span>
+                    <p-sortIcon field="amount"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdBy">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.createdBy">Created By</span>
+                    <p-sortIcon field="createdBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdOn">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.createdOn">Created On</span>
+                    <p-sortIcon field="createdOn"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modifiedBy">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.modifiedBy">Modified By</span>
+                    <p-sortIcon field="modifiedBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modifiedOn">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.modifiedOn">Modified On</span>
+                    <p-sortIcon field="modifiedOn"></p-sortIcon>
+                </th>
+                <th pSortableColumn="item">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.item">Item</span>
+                    <p-sortIcon field="item"></p-sortIcon>
+                </th>
+                <th pSortableColumn="expense">
+                    <span jhiTranslate="primeCashManagerApp.expenseDtl.expense">Expense</span>
+                    <p-sortIcon field="expense"></p-sortIcon>
+                </th>
+                <th style="width: 124px"></th>
+            </tr>
+            <tr>
+                <th>
+                    <input pInputText type="number" [ngModel]="expenseDtlTable.filters.id?.value"
+                           (ngModelChange)="filter($event, 'id')">
+                </th>
+                <th>
+                    <input pInputText type="number" [ngModel]="expenseDtlTable.filters.quantity?.value"
+                           (ngModelChange)="filter($event, 'quantity')">
+                </th>
+                <th>
+                    <input pInputText type="number" [ngModel]="expenseDtlTable.filters.unitPrice?.value"
+                           (ngModelChange)="filter($event, 'unitPrice')">
+                </th>
+                <th>
+                    <input pInputText type="number" [ngModel]="expenseDtlTable.filters.amount?.value"
+                           (ngModelChange)="filter($event, 'amount')">
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="expenseDtlTable.filters.createdBy?.value"
+                           (ngModelChange)="filter($event, 'createdBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="createdOnRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(createdOnRange, 'createdOn', true)" (onClearClick)="onDateSelect(createdOnRange, 'createdOn', true)"></p-calendar>
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="expenseDtlTable.filters.modifiedBy?.value"
+                           (ngModelChange)="filter($event, 'modifiedBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="modifiedOnRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(modifiedOnRange, 'modifiedOn', true)" (onClearClick)="onDateSelect(modifiedOnRange, 'modifiedOn', true)"></p-calendar>
+                </th>
+                <th>
+                    <p-multiSelect [options]="itemOptions" [ngModel]="expenseDtlTable.filters.itemId?.value" optionLabel="name" optionValue="id"
+                                   [lazy]="true" [rows]="10" (onLazyLoad)="onItemLazyLoadEvent($event)"
+                                   (ngModelChange)="filter($event, 'itemId')"></p-multiSelect>
+                </th>
+                <th>
+                    <p-multiSelect [options]="expenseOptions" [ngModel]="expenseDtlTable.filters.expenseId?.value" optionLabel="voucherNo" optionValue="id"
+                                   [lazy]="true" [rows]="10" (onLazyLoad)="onExpenseLazyLoadEvent($event)"
+                                   (ngModelChange)="filter($event, 'expenseId')"></p-multiSelect>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-expenseDtl>
+            <tr>
+                <td>{{expenseDtl.id}}</td>
+                <td>{{expenseDtl.quantity}}</td>
+                <td>{{expenseDtl.unitPrice}}</td>
+                <td>{{expenseDtl.amount}}</td>
+                <td>{{expenseDtl.createdBy}}</td>
+                <td>{{expenseDtl.createdOn | date:'medium'}}</td>
+                <td>{{expenseDtl.modifiedBy}}</td>
+                <td>{{expenseDtl.modifiedOn | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="expenseDtl.itemId">
+                        <a [routerLink]="['/item', expenseDtl.itemId , 'view' ]" >{{expenseDtl.itemName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="expenseDtl.expenseId">
+                        <a [routerLink]="['/expense', expenseDtl.expenseId , 'view' ]" >{{expenseDtl.expenseVoucherNo}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group flex-btn-group-container">
+                        <p-button type="submit" [routerLink]="['/expense-dtl', expenseDtl.id, 'view' ]"
+                                  icon="pi pi-eye" styleClass="ui-button-info">
+                        </p-button>
+                        <p-button type="submit" [routerLink]="['/expense-dtl', expenseDtl.id, 'edit' ]"
+                                  icon="pi pi-pencil" styleClass="ui-button-warning">
+                        </p-button>
+                        <p-button type="submit" (click)="delete(expenseDtl.id)"
+                                  icon="pi pi-times" styleClass="ui-button-danger">
+                        </p-button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

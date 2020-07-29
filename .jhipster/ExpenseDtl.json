@@ -1,0 +1,61 @@
+{
+    "name": "ExpenseDtl",
+    "fields": [
+        {
+            "fieldName": "quantity",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "unitPrice",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "modifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "modifiedOn",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "item",
+            "otherEntityRelationshipName": "expenseDtl",
+            "relationshipValidateRules": "required",
+            "relationshipName": "item",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "expense",
+            "otherEntityRelationshipName": "expanseDtl",
+            "relationshipName": "expense",
+            "otherEntityField": "voucherNo"
+        }
+    ],
+    "changelogDate": "20200729142200",
+    "entityTableName": "expense_dtl",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

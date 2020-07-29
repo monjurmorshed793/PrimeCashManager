@@ -1,0 +1,167 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="primeCashManagerApp.expense.home.title">Expenses</span>
+        <p-button id="jh-create-entity" class="float-right jh-create-entity create-expense" [routerLink]="['/expense/new']"
+                  [label]="'primeCashManagerApp.expense.home.createLabel' | translate" icon="pi pi-plus" iconPos="left">
+        </p-button>
+    </h2>
+    <br/>
+    <p-table #expenseTable [value]="expenses" [rowTrackBy]="trackId" [responsive]="true" [lazy]="true" [rows]="itemsPerPage" [totalRecords]="totalItems" [loading]="loading" sortMode="multiple" [lazyLoadOnInit]="false" [paginator]="true" (onLazyLoad)="onLazyLoadEvent($event)" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">
+                    <span jhiTranslate="primeCashManagerApp.expense.id">ID</span>
+                    <p-sortIcon field="id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="loginId">
+                    <span jhiTranslate="primeCashManagerApp.expense.loginId">Login Id</span>
+                    <p-sortIcon field="loginId"></p-sortIcon>
+                </th>
+                <th pSortableColumn="voucherNo">
+                    <span jhiTranslate="primeCashManagerApp.expense.voucherNo">Voucher No</span>
+                    <p-sortIcon field="voucherNo"></p-sortIcon>
+                </th>
+                <th pSortableColumn="voucherDate">
+                    <span jhiTranslate="primeCashManagerApp.expense.voucherDate">Voucher Date</span>
+                    <p-sortIcon field="voucherDate"></p-sortIcon>
+                </th>
+                <th pSortableColumn="month">
+                    <span jhiTranslate="primeCashManagerApp.expense.month">Month</span>
+                    <p-sortIcon field="month"></p-sortIcon>
+                </th>
+                <th pSortableColumn="notes">
+                    <span jhiTranslate="primeCashManagerApp.expense.notes">Notes</span>
+                    <p-sortIcon field="notes"></p-sortIcon>
+                </th>
+                <th pSortableColumn="totalAmount">
+                    <span jhiTranslate="primeCashManagerApp.expense.totalAmount">Total Amount</span>
+                    <p-sortIcon field="totalAmount"></p-sortIcon>
+                </th>
+                <th pSortableColumn="isPosted">
+                    <span jhiTranslate="primeCashManagerApp.expense.isPosted">Is Posted</span>
+                    <p-sortIcon field="isPosted"></p-sortIcon>
+                </th>
+                <th pSortableColumn="postDate">
+                    <span jhiTranslate="primeCashManagerApp.expense.postDate">Post Date</span>
+                    <p-sortIcon field="postDate"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdBy">
+                    <span jhiTranslate="primeCashManagerApp.expense.createdBy">Created By</span>
+                    <p-sortIcon field="createdBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdOn">
+                    <span jhiTranslate="primeCashManagerApp.expense.createdOn">Created On</span>
+                    <p-sortIcon field="createdOn"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modifiedBy">
+                    <span jhiTranslate="primeCashManagerApp.expense.modifiedBy">Modified By</span>
+                    <p-sortIcon field="modifiedBy"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modifiedOn">
+                    <span jhiTranslate="primeCashManagerApp.expense.modifiedOn">Modified On</span>
+                    <p-sortIcon field="modifiedOn"></p-sortIcon>
+                </th>
+                <th pSortableColumn="payTo">
+                    <span jhiTranslate="primeCashManagerApp.expense.payTo">Pay To</span>
+                    <p-sortIcon field="payTo"></p-sortIcon>
+                </th>
+                <th style="width: 124px"></th>
+            </tr>
+            <tr>
+                <th>
+                    <input pInputText type="number" [ngModel]="expenseTable.filters.id?.value"
+                           (ngModelChange)="filter($event, 'id')">
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="expenseTable.filters.loginId?.value"
+                           (ngModelChange)="filter($event, 'loginId')">
+                </th>
+                <th>
+                    <input pInputText type="number" [ngModel]="expenseTable.filters.voucherNo?.value"
+                           (ngModelChange)="filter($event, 'voucherNo')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="voucherDateRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true"
+                                (onSelect)="onDateSelect(voucherDateRange, 'voucherDate')" (onClearClick)="onDateSelect(voucherDateRange, 'voucherDate')"></p-calendar>
+                </th>
+                <th>
+                    <p-multiSelect [options]="monthOptions" [ngModel]="expenseTable.filters.month?.value"
+                                   (ngModelChange)="filter($event, 'month')">
+                        <ng-template let-month pTemplate="item">{{'primeCashManagerApp.MonthType.' + month.label | translate}}</ng-template>
+                    </p-multiSelect>
+                </th>
+                <th>
+                </th>
+                <th>
+                    <input pInputText type="number" [ngModel]="expenseTable.filters.totalAmount?.value"
+                           (ngModelChange)="filter($event, 'totalAmount')">
+                </th>
+                <th>
+                    <p-triStateCheckbox [ngModel]="expenseTable.filters.billable?.value"
+                                        (ngModelChange)="filter($event, 'isPosted')"></p-triStateCheckbox>
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="postDateRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(postDateRange, 'postDate', true)" (onClearClick)="onDateSelect(postDateRange, 'postDate', true)"></p-calendar>
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="expenseTable.filters.createdBy?.value"
+                           (ngModelChange)="filter($event, 'createdBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="createdOnRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(createdOnRange, 'createdOn', true)" (onClearClick)="onDateSelect(createdOnRange, 'createdOn', true)"></p-calendar>
+                </th>
+                <th>
+                    <input pInputText type="text" [ngModel]="expenseTable.filters.modifiedBy?.value"
+                           (ngModelChange)="filter($event, 'modifiedBy')">
+                </th>
+                <th>
+                    <p-calendar [(ngModel)]="modifiedOnRange" selectionMode="range" [readonlyInput]="true" [showButtonBar]="true" showTime="true" hourFormat="24"
+                                (onSelect)="onDateSelect(modifiedOnRange, 'modifiedOn', true)" (onClearClick)="onDateSelect(modifiedOnRange, 'modifiedOn', true)"></p-calendar>
+                </th>
+                <th>
+                    <p-multiSelect [options]="payToOptions" [ngModel]="expenseTable.filters.payToId?.value" optionLabel="name" optionValue="id"
+                                   [lazy]="true" [rows]="10" (onLazyLoad)="onPayToLazyLoadEvent($event)"
+                                   (ngModelChange)="filter($event, 'payToId')"></p-multiSelect>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-expense>
+            <tr>
+                <td>{{expense.id}}</td>
+                <td>{{expense.loginId}}</td>
+                <td>{{expense.voucherNo}}</td>
+                <td>{{expense.voucherDate | date:'mediumDate'}}</td>
+                <td jhiTranslate="{{'primeCashManagerApp.MonthType.' + expense.month}}">{{expense.month}}</td>
+                <td>{{expense.notes}}</td>
+                <td>{{expense.totalAmount}}</td>
+                <td>{{expense.isPosted}}</td>
+                <td>{{expense.postDate | date:'medium'}}</td>
+                <td>{{expense.createdBy}}</td>
+                <td>{{expense.createdOn | date:'medium'}}</td>
+                <td>{{expense.modifiedBy}}</td>
+                <td>{{expense.modifiedOn | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="expense.payToId">
+                        <a [routerLink]="['/pay-to', expense.payToId , 'view' ]" >{{expense.payToName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group flex-btn-group-container">
+                        <p-button type="submit" [routerLink]="['/expense', expense.id, 'view' ]"
+                                  icon="pi pi-eye" styleClass="ui-button-info">
+                        </p-button>
+                        <p-button type="submit" [routerLink]="['/expense', expense.id, 'edit' ]"
+                                  icon="pi pi-pencil" styleClass="ui-button-warning">
+                        </p-button>
+                        <p-button type="submit" (click)="delete(expense.id)"
+                                  icon="pi pi-times" styleClass="ui-button-danger">
+                        </p-button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

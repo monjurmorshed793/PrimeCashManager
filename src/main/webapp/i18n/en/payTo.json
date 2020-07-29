@@ -1,0 +1,28 @@
+{
+  "primeCashManagerApp": {
+    "payTo": {
+      "home": {
+        "title": "Pay Tos",
+        "createLabel": "Create a new Pay To",
+        "createOrEditLabel": "Create or edit a Pay To",
+        "notFound": "No Pay Tos found"
+      },
+      "created": "A new Pay To is created with identifier {{ param }}",
+      "updated": "A Pay To is updated with identifier {{ param }}",
+      "deleted": "A Pay To is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pay To {{ id }}?"
+      },
+      "detail": {
+        "title": "Pay To"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "createdBy": "Created By",
+      "createdOn": "Created On",
+      "modifiedBy": "Modified By",
+      "modifiedOn": "Modified On"
+    }
+  }
+}

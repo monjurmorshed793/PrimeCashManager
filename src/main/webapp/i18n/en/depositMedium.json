@@ -1,0 +1,10 @@
+{
+  "primeCashManagerApp": {
+    "DepositMedium": {
+      "null": "",
+      "ATM": "ATM",
+      "BANK": "BANK",
+      "CASH": "CASH"
+    }
+  }
+}

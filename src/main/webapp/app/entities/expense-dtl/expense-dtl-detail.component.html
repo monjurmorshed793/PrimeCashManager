@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="expenseDtl">
+            <h2><span jhiTranslate="primeCashManagerApp.expenseDtl.detail.title">Expense Dtl</span> {{expenseDtl.id}}</h2>
+            <hr>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.quantity">Quantity</span></dt>
+                <dd>
+                    <span>{{ expenseDtl.quantity }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.unitPrice">Unit Price</span></dt>
+                <dd>
+                    <span>{{ expenseDtl.unitPrice }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.amount">Amount</span></dt>
+                <dd>
+                    <span>{{ expenseDtl.amount }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ expenseDtl.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.createdOn">Created On</span></dt>
+                <dd>
+                    <span>{{ expenseDtl.createdOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.modifiedBy">Modified By</span></dt>
+                <dd>
+                    <span>{{ expenseDtl.modifiedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.modifiedOn">Modified On</span></dt>
+                <dd>
+                    <span>{{ expenseDtl.modifiedOn }}</span>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.item">Item</span></dt>
+                <dd>
+                    <div *ngIf="expenseDtl.itemId">
+                        <a [routerLink]="['/item', expenseDtl.itemId, 'view']">
+                            {{ expenseDtl.itemName }}
+                        </a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="primeCashManagerApp.expenseDtl.expense">Expense</span></dt>
+                <dd>
+                    <div *ngIf="expenseDtl.expenseId">
+                        <a [routerLink]="['/expense', expenseDtl.expenseId, 'view']">
+                            {{ expenseDtl.expenseVoucherNo }}
+                        </a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button pButton type="submit" (click)="previousState()" class="ui-button-info" icon="pi pi-arrow-left" [label]="'entity.action.back' | translate"></button>
+            <button pButton type="button" icon="pi pi-pencil" [label]="'entity.action.edit' | translate" [routerLink]="['/expense-dtl', expenseDtl.id, 'edit']"></button>
+        </div>
+    </div>
+</div>

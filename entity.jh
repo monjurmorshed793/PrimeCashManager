@@ -1,0 +1,104 @@
+entity Item{
+	name String,
+    description TextBlob,
+    createdBy String,
+    createdOn Instant,
+    modifiedBy String,
+    modifiedOn Instant
+}
+
+entity PayTo{
+	name String,
+    description TextBlob,
+    createdBy String,
+    createdOn Instant,
+    modifiedBy String,
+    modifiedOn Instant
+}
+
+entity Deposit{
+	loginId String required,
+    depositNo Integer unique,
+    depositBy String required,
+    depositDate LocalDate required,
+    medium DepositMedium required,
+    amount BigDecimal required,
+    note TextBlob required,
+    isPosted Boolean,
+    postDate Instant,
+    createdBy String,
+    createdOn Instant,
+    modifiedBy String,
+    modifiedOn Instant
+}
+
+entity Expense{
+	loginId String required,
+    voucherNo Integer unique,
+    voucherDate LocalDate required,
+    month MonthType required,
+    notes TextBlob required,
+    totalAmount BigDecimal,
+    isPosted Boolean,
+    postDate Instant,
+    createdBy String,
+    createdOn Instant,
+    modifiedBy String,
+    modifiedOn Instant
+}
+
+@skipClient
+entity ExpanseSeq{
+
+}
+@skipClient
+entity DepositSeq{
+
+}
+
+entity ExpenseDtl{
+	//item
+    quantity BigDecimal ,
+    unitPrice BigDecimal ,
+    amount BigDecimal ,
+    createdBy String,
+    createdOn Instant,
+    modifiedBy String,
+    modifiedOn Instant
+}
+
+
+enum DepositMedium{
+	ATM,
+    BANK,
+    CASH
+}
+
+enum MonthType{
+  JANUARY,
+  FEBRUARY,
+  MARCH,
+  APRIL,
+  MAY,
+  JUNE,
+  JULY,
+  AUGUST,
+  SEPTEMBER,
+  OCTOBER,
+  NOVEMBER,
+  DECEMBER
+}
+
+relationship ManyToOne {
+    ExpenseDtl{item(name) required} to Item,
+    Expense{payTo(name) required} to PayTo
+}
+
+relationship OneToMany{
+    Expense{expanseDtl} to ExpanseDtl{expense(voucherNo)}
+}
+
+dto all with mapstruct
+filter *
+paginate Item, PayTo, Deposit, Expense, ExpenseDtl with pagination
+service Item, PayTo, Deposit, Expanse, ExpenseDtl with serviceClass

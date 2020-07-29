@@ -95,10 +95,10 @@ relationship ManyToOne {
 }
 
 relationship OneToMany{
-    Expense{expanseDtl} to ExpanseDtl{expense(voucherNo)}
+    Expense{expanseDtl} to ExpenseDtl{expense(voucherNo)}
 }
 
 dto all with mapstruct
 filter *
 paginate Item, PayTo, Deposit, Expense, ExpenseDtl with pagination
-service Item, PayTo, Deposit, Expanse, ExpenseDtl with serviceClass
+service Item, PayTo, Deposit, Expense, ExpenseDtl with serviceClass
